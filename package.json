@@ -1,19 +1,26 @@
 {
   "name": "kinoproxy",
   "version": "1.0.0",
+  "author": "",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon ./serverish/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/myapos/kinoproxy.git"
   },
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/myapos/kinoproxy/issues"
   },
-  "homepage": "https://github.com/myapos/kinoproxy#readme"
+  "homepage": "https://github.com/myapos/kinoproxy#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "node-fetch": "^2.3.0",
+    "nodemon": "^1.18.9"
+  }
 }
