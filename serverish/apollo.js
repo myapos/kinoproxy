@@ -6,7 +6,8 @@
 import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
 
-import StarWarsAPI from './datasources/StarWarsAPI';
+// import StarWarsAPI from './datasources/StarWarsAPI';
+import KinoAPI from './datasources/KinoAPI';
 
 function parseSwapiURL(url) {
   // "https://swapi.co/api/people/1/"
@@ -18,46 +19,58 @@ function parseSwapiURL(url) {
     id: parts[5],
   };
 }
+// https://applications.opap.gr/DrawsRestServices/kino/drawDate/2-2-2019.json
 // http://api.openweathermap.org/data/2.5/forecast?id=6167865&APPID=9104e8c3dfac703a357aa39dcd429121
 const port = process.env.PORT || 2000;
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
-  type Person {
-    name: String
-    films: [Film]
-  } 
-  type Film {
-    title: String
-  }
-  type Query {
-    people: [Person]
-  }
+  
+type Draw {
+  drawTime: String,
+  drawNo: Int,
+  results: [Int]
+}
+  
+type Query {
+  draws: [Draw]
+}
+
 `;
  
+// const typeDefs = gql`
+  
+//   type Query {
+//     draws: String
+//   }
+// `;
+
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    people: (parent, args, context) => {
-      return context.dataSources.starWars.getPeople();
+    draws: (parent, args, context) => {
+      console.log('parent:', parent);
+      console.log('args:', args);
+      
+      return context.dataSources.kinoAPI.getSingleDate();
     }
   },
-  Person: {
-    films: async (parent, args, context) => {
-      return Promise.all(
-        parent.films
-          .map((url) => parseSwapiURL(url).id)
-          .map((id) => context.dataSources.starWars.getFilm(id))
-      );
-    }
-  }
+  // Person: {
+  //   films: async (parent, args, context) => {
+  //     return Promise.all(
+  //       parent.films
+  //         .map((url) => parseSwapiURL(url).id)
+  //         .map((id) => context.dataSources.starWars.getFilm(id))
+  //     );
+  //   }
+  // }
 };
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => {
     return {
-      starWars: new StarWarsAPI(),
+      kinoAPI: new KinoAPI(),
     };
   },
 });
