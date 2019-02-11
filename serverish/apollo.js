@@ -1,6 +1,6 @@
 // https://www.apollographql.com/docs/apollo-server/essentials/server.html
 // https://www.reddit.com/r/graphql/comments/8kwldy/help_querying_data_from_a_3rd_party_api_with/
-
+// https://hackernoon.com/using-babel-7-with-node-7e401bc28b04
 
 import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
