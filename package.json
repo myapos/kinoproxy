@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./serverish/server.js",
-    "server": "nodemon ./serverish/server.js"
+    "server": "nodemon ./serverish/server.js",
+    "apollo": "nodemon ./serverish/start.js"
   },
   "repository": {
     "type": "git",
@@ -19,9 +20,17 @@
   },
   "homepage": "https://github.com/myapos/kinoproxy#readme",
   "dependencies": {
+    "apollo-datasource-rest": "^0.3.0",
+    "apollo-server": "^2.4.0",
+    "apollo-server-express": "^2.4.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "graphql": "^14.1.1",
     "node-fetch": "^2.3.0",
     "nodemon": "^1.18.9"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
   }
 }
