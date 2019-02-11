@@ -31,39 +31,21 @@ type Draw {
   drawNo: Int,
   results: [Int]
 }
-  
 type Query {
-  draws: [Draw]
+  draws(date: String): [Draw]
 }
-
 `;
  
-// const typeDefs = gql`
-  
-//   type Query {
-//     draws: String
-//   }
-// `;
-
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
     draws: (parent, args, context) => {
       console.log('parent:', parent);
       console.log('args:', args);
-      
-      return context.dataSources.kinoAPI.getSingleDate();
+      const { date } = args;
+      return context.dataSources.kinoAPI.getDate(date);
     }
   },
-  // Person: {
-  //   films: async (parent, args, context) => {
-  //     return Promise.all(
-  //       parent.films
-  //         .map((url) => parseSwapiURL(url).id)
-  //         .map((id) => context.dataSources.starWars.getFilm(id))
-  //     );
-  //   }
-  // }
 };
 const server = new ApolloServer({
   typeDefs,

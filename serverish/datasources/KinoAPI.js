@@ -8,9 +8,12 @@ class KinoAPI extends RESTDataSource {
 
   async getSingleDate() {
     const response = await this.get(`2-2-2019.json`);
-    // console.log('edw', response);
-    
     return response.draws.draw;
+  }
+
+  async getDate(date) {
+    const response = await this.get(`${date}.json`);
+     return response.draws.draw;
   }
 
 
